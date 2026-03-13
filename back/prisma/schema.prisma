@@ -4,6 +4,29 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  pantryItems PantryItem[]
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  unit      String
+  category  String?
+  pantryItems PantryItem[]
+}
+
+model PantryItem {
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  quantity     Float @default(1.0)
+  expiry   String @default("Em dia")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([userId, ingredientId])
 }
 
 generator client {
