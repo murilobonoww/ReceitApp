@@ -1,5 +1,5 @@
 import { Router } from "express";
-import controller from "./PantryItem.controller.js";
+import controller from "./Ingredient.controller.js";
 
 const router = Router()
 
@@ -8,6 +8,6 @@ router.get("/getById/:id", controller.getById)
 
 router.post("/create", controller.create)
 
-router.delete("/delete/:id", controller.deletePantryItem)
+router.delete("/delete/:id", controller.deleteIngredient)
 
 export default router
